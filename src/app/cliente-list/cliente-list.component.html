@@ -1,0 +1,134 @@
+<div class="panel panel-default">  
+    <div class="panel-heading">  
+        <h1 style="text-align: center">Clientes</h1><br>  
+        <div class="row" [hidden]="!deleteMessage">  
+               
+                  <div class="col-sm-4"></div>  
+                  <div class="col-sm-4">  
+                          <div class="alert alert-info alert-dismissible">  
+                                  <button type="button" class="close" data-dismiss="alert">×</button>  
+                                  <strong>Cliente excluído</strong>  
+                          </div>  
+                  </div>  
+                  <div class="col-sm-4"></div>  
+          </div>             
+      </div>  
+    
+      
+    <div class="panel-body">  
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  
+        [dtTrigger]="dtTrigger"  >  
+            <thead class="thead-light">  
+                <tr>  
+                    <th>Nome</th>  
+                    <th>Nome social</th>  
+                    <th>CPF</th>  
+                    <th>E-mail</th> 
+                    <th>Opções</th> 
+                      
+                </tr>  
+            </thead>  
+            <tbody>  
+                
+                 <tr *ngFor="let cliente of clientes">  
+                
+                    <td>{{cliente.nome}}</td>  
+                    <td>{{cliente.nomeSocial}}</td>  
+                    <td>{{cliente.cpf}}</td>  
+                    <td>{{cliente.email}}</td>  
+                   
+                    <td><button (click)="deleteCliente(cliente.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Excluir</i></button>   
+                      <button (click)="updateCliente(cliente.id)" class='btn btn-info'  
+                      data-toggle="modal" data-target="#myModal">Atualizar</button>  
+                    </td>  
+                  </tr>   
+            </tbody><br>  
+        </table>  
+    </div>  
+   
+    
+  <div class="modal" id="myModal">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+            <form [formGroup]="clienteupdateform" #updcliente (ngSubmit)="updateCli(updcliente)">  
+        <!-- Modal Header -->  
+        <div class="modal-header">  
+            <h4 class="modal-title" style="text-align:center"> Atualizar cliente</h4>  
+                    </div>  
+          
+        <!-- Modal body -->  
+        <div class="modal-body" *ngFor="let cliente of clientelist" > 
+      
+            <div [hidden]="isupdated">  
+              
+                <input type="hidden" class="form-control"  formControlName="id" [(ngModel)]="cliente.id" > 
+               
+              
+                      <!--ClienteNome-->
+                        <div class="form-group">  
+                            <label for="nome">Nome</label>  
+                            <input type="text" class="form-control"  formControlName="nome" [(ngModel)]="cliente.nome">  
+                        </div>  
+
+                           <!--ClienteApelido-->
+                           <div class="form-group">  
+                              <label for="apelido">Apelido</label>  
+                              <input type="text" class="form-control"  formControlName="apelido" [(ngModel)]="cliente.apelido" >  
+                          </div>  
+
+                      <!--ClienteCpf-->
+                        <div class="form-group">  
+                          <label for="cpf">Cpf</label>  
+                          <input type="text" class="form-control"  formControlName="cpf" [(ngModel)]="cliente.cpf"  >  
+                      </div>  
+
+                         <!--ClienteDataNascimento-->
+                         <div class="form-group">  
+                          <label for="dataNascimento">Data de nascimento</label>  
+                          <input type="text" class="form-control"  formControlName="dataNascimento" [(ngModel)]="cliente.dataNascimento"  >  
+                      </div>  
+
+                         <!--ClienteEmail-->
+                         <div class="form-group">  
+                          <label for="email">Email</label>  
+                          <input type="text" class="form-control"  formControlName="email" [(ngModel)]="cliente.email"  >  
+                      </div>  
+
+                         <!--ClienteNomeSocial-->
+                         <div class="form-group">  
+                          <label for="nomeSocial">Nome social</label>  
+                          <input type="text" class="form-control"  formControlName="nomeSocial" [(ngModel)]="cliente.nomeSocial"  >  
+                      </div>  
+                  
+                         <!--ClienteTelefone-->
+                         <div class="form-group">  
+                          <label for="telefone">Telefone</label>  
+                          <input type="text" class="form-control"  formControlName="telefone" [(ngModel)]="cliente.telefone"  >  
+                      </div>  
+                     
+                  
+                        <div class="form-group">  
+                            <label for="sexo">Sexo</label>  
+                              <select class="form-control" formControlName="sexo" required>                                     
+                                <option value="Feminino" [selected]="'Feminino' == cliente.sexo">Feminino</option>  
+                                <option value="Masculino" [selected]="'Masculino' == cliente.sexo">Masculino</option>  
+                                <option value="Outro" [selected]="'Outro' == cliente.sexo" >Outro</option>  
+                              </select>                                 
+                        </div>                     
+              </div>    
+              <div [hidden]="!isupdated">  
+                  <h4>Cliente atualizado!</h4>  
+              </div>          
+                  
+        </div>  
+          
+        <!-- Modal footer -->  
+        <div class="modal-footer" >  
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Atualizar</button>  
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Fechar</button>  
+        </div>  
+          
+    </form>  
+      </div>  
+    </div>  
+  </div>

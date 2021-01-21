@@ -1,0 +1,161 @@
+<div class="panel panel-default">  
+    <div class="panel-heading">  
+        <h1 style="text-align: center">Produtos</h1><br>  
+        <div class="row" [hidden]="!deleteMessage">  
+               
+                  <div class="col-sm-4"></div>  
+                  <div class="col-sm-4">  
+                          <div class="alert alert-info alert-dismissible">  
+                                  <button type="button" class="close" data-dismiss="alert">×</button>  
+                                  <strong>Produto excluído</strong>  
+                          </div>  
+                  </div>  
+                  <div class="col-sm-4"></div>  
+          </div>             
+      </div>  
+    
+      
+    <div class="panel-body">  
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  
+        [dtTrigger]="dtTrigger"  >  
+            <thead class="thead-light">  
+                <tr>  
+                    <th>Nome</th>  
+                    <th>Descrição</th>  
+                    <th>Preço Unitário</th>  
+                    <th>Unidades</th> 
+                    <th>Opções</th> 
+                      
+                </tr>  
+            </thead>  
+            <tbody>  
+                
+                 <tr *ngFor="let produto of produtos">  
+                
+                    <td>{{produto.nome}}</td>  
+                    <td>{{produto.descricao}}</td>  
+                    <td>{{produto.precoUnitario}}</td>  
+                    <td>{{produto.unidade}}</td>  
+                   
+                    <td><button (click)="deleteProduto(produto.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Excluir</i></button>   
+                      <button (click)="updateProduto(produto.id)" class='btn btn-info'  
+                      data-toggle="modal" data-target="#myModal">Atualizar</button>  
+                    </td>  
+                  </tr>   
+            </tbody><br>  
+        </table>  
+    </div>  
+   
+    
+  <div class="modal" id="myModal">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+            <form [formGroup]="produtoupdateform" #updproduto (ngSubmit)="updateCli(updproduto)">  
+        <!-- Modal Header -->  
+        <div class="modal-header">  
+            <h4 class="modal-title" style="text-align:center"> Atualizar produto</h4>  
+                    </div>  
+          
+        <!-- Modal body -->  
+        <div class="modal-body" *ngFor="let produto of produtolist" > 
+      
+            <div [hidden]="isupdated">  
+              
+                <input type="hidden" class="form-control"  formControlName="id" [(ngModel)]="produto.id" > 
+               
+              
+            <!--CampoNome-->
+               
+            <div class="form-group">
+                <label for="nome">Nome do produto</label>
+                <input type="text" class="form-control" formControlName="nome" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o nome do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoNome.touched) && (ProdutoNome.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoNome.errors.required">O nome é obrigatório</span>
+                </div>
+            </div>
+
+              <!--Campodescricao-->
+              <div class="form-group">
+                <label for="descricao">Descricao do produto</label>
+                <input type="text" class="form-control" formControlName="descricao" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o descricao do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoDescricao.touched) && (ProdutoDescricao.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoDescricao.errors.required">A descricao é obrigatório</span>
+                </div>
+            </div>
+
+              <!--CampoidCategoria-->
+              <div class="form-group">
+                <label for="idCategoria">idCategoria do produto</label>
+                <input type="text" class="form-control" formControlName="idCategoria" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o idCategoria do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoIdCategoria.touched) && (ProdutoIdCategoria.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoIdCategoria.errors.required">O idCategoria é obrigatório</span>
+                </div>
+            </div>
+
+              <!--CampoidFornecedor-->
+              <div class="form-group">
+                <label for="idFornecedor">idFornecedor do produto</label>
+                <input type="text" class="form-control" formControlName="idFornecedor" data-toggle="tooltip"
+                    data-placement="right" title="Entre idFornecedor do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoIdFornecedor.touched) && (ProdutoIdFornecedor.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoIdFornecedor.errors.required">A idFornecedor é obrigatória</span>
+                </div>
+            </div>
+
+              <!--CampoidMarca-->
+              <div class="form-group">
+                <label for="idMarca">idMarca do produto</label>
+                <input type="text" class="form-control" formControlName="idMarca" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o idMarca do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoIdMarca.touched) && (ProdutoIdMarca.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoIdMarca.errors.required">O idMarca é obrigatório</span>
+                </div>
+            </div>
+
+              <!--CampoprecoUnitario-->
+              <div class="form-group">
+                <label for="precoUnitario">precoUnitario do produto</label>
+                <input type="text" class="form-control" formControlName="precoUnitario" data-toggle="tooltip"
+                    data-placement="right" title="Entre com oprecoUnitario do produto">
+                <div class="alert alert-danger" *ngIf="(ProdutoPrecoUnitario.touched) && (ProdutoPrecoUnitario.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="ProdutoPrecoUnitario.errors.required">O precoUnitario é obrigatório</span>
+                </div>
+            </div>
+
+                  <!--Campounidade-->
+                  <div class="form-group">
+                    <label for="unidade">Unidades do produto</label>
+                    <input type="text" class="form-control" formControlName="unidade" data-toggle="tooltip"
+                        data-placement="right" title="Entre com as unidades do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoUnidade.touched) && (ProdutoUnidade.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoUnidade.errors.required">O Unidade é obrigatório</span>
+                    </div>
+                </div>
+               
+              </div>    
+              <div [hidden]="!isupdated">  
+                  <h4>Produto atualizado!</h4>  
+              </div>          
+                  
+        </div>  
+          
+        <!-- Modal footer -->  
+        <div class="modal-footer" >  
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Atualizar</button>  
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Fechar</button>  
+        </div>  
+          
+    </form>  
+      </div>  
+    </div>  
+  </div>

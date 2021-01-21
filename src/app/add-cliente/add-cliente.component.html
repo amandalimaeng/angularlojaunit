@@ -1,0 +1,117 @@
+
+
+<h3>Adicionar Cliente</h3>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="submitted" style="width: 400px;">
+            <form [formGroup]="clientesaveform" #savecliente (ngSubmit)="saveCliente(saveCliente)">
+            
+                <!--CampoNome-->
+               
+                <div class="form-group">
+                    <label for="nome">Nome do cliente</label>
+                    <input type="text" class="form-control" formControlName="nome" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o nome do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteNome.touched) && (ClienteNome.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteNome.errors.required">O nome é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoApelido-->
+                  <div class="form-group">
+                    <label for="apelido">Apelido do cliente</label>
+                    <input type="text" class="form-control" formControlName="apelido" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o apelido do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteApelido.touched) && (ClienteApelido.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteApelido.errors.required">O apelido é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoCPF-->
+                  <div class="form-group">
+                    <label for="cpf">CPF do cliente</label>
+                    <input type="text" class="form-control" formControlName="cpf" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o cpf do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteCpf.touched) && (ClienteCpf.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteCpf.errors.required">O cpf é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoDataNascimento-->
+                  <div class="form-group">
+                    <label for="dataNascimento">Data de nascimento do cliente</label>
+                    <input type="text" class="form-control" formControlName="dataNascimento" data-toggle="tooltip"
+                        data-placement="right" title="Entre com a data de nascimento do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteDataNascimento.touched) && (ClienteDataNascimento.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteDataNascimento.errors.required">A data de nascimento é obrigatória</span>
+                    </div>
+                </div>
+
+                  <!--CampoEmail-->
+                  <div class="form-group">
+                    <label for="email">Email do cliente</label>
+                    <input type="text" class="form-control" formControlName="email" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o email do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteEmail.touched) && (ClienteEmail.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteEmail.errors.required">O email é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoNomeSocial-->
+                  <div class="form-group">
+                    <label for="nomeSocial">Nome social do cliente</label>
+                    <input type="text" class="form-control" formControlName="nomeSocial" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o nome social do cliente">
+                    <div class="alert alert-danger" *ngIf="(ClienteNomeSocial.touched) && (ClienteNomeSocial.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ClienteNomeSocial.errors.required">O nome social é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoSexo-->
+                  <div class="form-group">  
+                    <label for="sexo">Sexo do cliente</label>  
+                      <select class="form-control" formControlName="sexo" data-toggle="tooltip"   
+                            data-placement="right" title="Selecione o sexo">  
+                          <option value="null">--Selecione o sexo--</option>  
+                        <option value="Feminino">Feminino</option>  
+                        <option value="Masculino">Masculino</option>  
+                        <option value="Outro">Outro</option>  
+                      </select>  
+                </div>  
+
+                    <!--CampoTelefone-->
+                    <div class="form-group">
+                        <label for="telefone">Telefone do cliente</label>
+                        <input type="text" class="form-control" formControlName="telefone" data-toggle="tooltip"
+                            data-placement="right" title="Entre com o telefone do cliente">
+                        <div class="alert alert-danger" *ngIf="(ClienteTelefone.touched) && (ClienteTelefone.invalid)"
+                            style="margin-top: 5px;">
+                            <span *ngIf="ClienteTelefone.errors.required">O telefone é obrigatório</span>
+                        </div>
+                    </div>
+
+
+
+                <button type="submit" class="btn btn-success">Adicionar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="!submitted">
+            <h4>Cliente adiconado com sucesso!</h4>
+            <button (click)="addClienteForm()" class='btn btn-primary'>Adicionar outro cliente</button>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>

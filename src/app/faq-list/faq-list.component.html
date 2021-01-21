@@ -1,0 +1,103 @@
+<div class="panel panel-default">  
+    <div class="panel-heading">  
+        <h1 style="text-align: center">Faqs</h1><br>  
+        <div class="row" [hidden]="!deleteMessage">  
+               
+                  <div class="col-sm-4"></div>  
+                  <div class="col-sm-4">  
+                          <div class="alert alert-info alert-dismissible">  
+                                  <button type="button" class="close" data-dismiss="alert">×</button>  
+                                  <strong>Faq excluído</strong>  
+                          </div>  
+                  </div>  
+                  <div class="col-sm-4"></div>  
+          </div>             
+      </div>  
+    
+      
+    <div class="panel-body">  
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  
+        [dtTrigger]="dtTrigger"  >  
+            <thead class="thead-light">  
+                <tr>  
+                    <th>Texto</th>  
+                    <th>IdProduto</th>  
+                    <th>Opções</th> 
+                      
+                </tr>  
+            </thead>  
+            <tbody>  
+                
+                 <tr *ngFor="let faq of faqs">  
+                
+                    <td>{{faq.texto}}</td>  
+                    <td>{{faq.idProduto}</td>  
+                   
+                    <td><button (click)="deleteFaq(faq.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Excluir</i></button>   
+                      <button (click)="updateFaq(faq.id)" class='btn btn-info'  
+                      data-toggle="modal" data-target="#myModal">Atualizar</button>  
+                    </td>  
+                  </tr>   
+            </tbody><br>  
+        </table>  
+    </div>  
+   
+    
+  <div class="modal" id="myModal">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+            <form [formGroup]="faqupdateform" #updfaq (ngSubmit)="updateCli(updfaq)">  
+        <!-- Modal Header -->  
+        <div class="modal-header">  
+            <h4 class="modal-title" style="text-align:center"> Atualizar faq</h4>  
+                    </div>  
+          
+        <!-- Modal body -->  
+        <div class="modal-body" *ngFor="let faq of faqlist" > 
+      
+            <div [hidden]="isupdated">  
+              
+                <input type="hidden" class="form-control"  formControlName="id" [(ngModel)]="faq.id" > 
+               
+              
+      <!--CampoTexto-->
+               
+      <div class="form-group">
+        <label for="texto">Digite a sua reclamação</label>
+        <input type="text"  class="form-control" formControlName="texto" data-toggle="tooltip"
+            data-placement="right" title="Digite o testo">
+        <div class="alert alert-danger" *ngIf="(FaqTexto.touched) && (FaqTexto.invalid)"
+            style="margin-top: 5px;">
+            <span *ngIf="FaqTexto.errors.required">O texto é obrigatório</span>
+        </div>
+    </div>
+
+      <!--CampoIdProduto-->
+      <div class="form-group">
+        <label for="apelido">Id do produto</label>
+        <input type="text" class="form-control" formControlName="idProduto" data-toggle="tooltip"
+            data-placement="right" title="Entre com o id do produto">
+        <div class="alert alert-danger" *ngIf="(FaqIdProduto.touched) && (FaqIdProduto.invalid)"
+            style="margin-top: 5px;">
+            <span *ngIf="FaqIdProduto.errors.required">O ID é obrigatório</span>
+        </div>
+    </div>
+
+                     
+              </div>    
+              <div [hidden]="!isupdated">  
+                  <h4>Faq atualizado!</h4>  
+              </div>          
+                  
+        </div>  
+          
+        <!-- Modal footer -->  
+        <div class="modal-footer" >  
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Atualizar</button>  
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Fechar</button>  
+        </div>  
+          
+    </form>  
+      </div>  
+    </div>  
+  </div>

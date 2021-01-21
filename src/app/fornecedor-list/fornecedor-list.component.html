@@ -1,0 +1,143 @@
+<div class="panel panel-default">  
+    <div class="panel-heading">  
+        <h1 style="text-align: center">Fornecedors</h1><br>  
+        <div class="row" [hidden]="!deleteMessage">  
+               
+                  <div class="col-sm-4"></div>  
+                  <div class="col-sm-4">  
+                          <div class="alert alert-info alert-dismissible">  
+                                  <button type="button" class="close" data-dismiss="alert">×</button>  
+                                  <strong>Fornecedor excluído</strong>  
+                          </div>  
+                  </div>  
+                  <div class="col-sm-4"></div>  
+          </div>             
+      </div>  
+    
+      
+    <div class="panel-body">  
+        <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  
+        [dtTrigger]="dtTrigger"  >  
+            <thead class="thead-light">  
+                <tr>  
+                    <th>Nome</th>  
+                    <th>CNPJ</th>  
+              
+                    <th>E-mail</th> 
+                    <th>Opções</th> 
+                      
+                </tr>  
+            </thead>  
+            <tbody>  
+                
+                 <tr *ngFor="let fornecedor of fornecedors">  
+                
+                    <td>{{fornecedor.nome}}</td>  
+                    <td>{{fornecedor.cnpj}}</td>  
+                   
+                    <td>{{fornecedor.email}}</td>  
+                   
+                    <td><button (click)="deleteFornecedor(fornecedor.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Excluir</i></button>   
+                      <button (click)="updateFornecedor(fornecedor.id)" class='btn btn-info'  
+                      data-toggle="modal" data-target="#myModal">Atualizar</button>  
+                    </td>  
+                  </tr>   
+            </tbody><br>  
+        </table>  
+    </div>  
+   
+    
+  <div class="modal" id="myModal">  
+    <div class="modal-dialog">  
+      <div class="modal-content">  
+            <form [formGroup]="fornecedorupdateform" #updfornecedor (ngSubmit)="updateCli(updfornecedor)">  
+        <!-- Modal Header -->  
+        <div class="modal-header">  
+            <h4 class="modal-title" style="text-align:center"> Atualizar fornecedor</h4>  
+                    </div>  
+          
+        <!-- Modal body -->  
+        <div class="modal-body" *ngFor="let fornecedor of fornecedorlist" > 
+      
+            <div [hidden]="isupdated">  
+              
+                <input type="hidden" class="form-control"  formControlName="id" [(ngModel)]="fornecedor.id" > 
+               
+             <!--CampoNome-->
+               
+             <div class="form-group">
+                <label for="nome">Nome do fornecedor</label>
+                <input type="text" class="form-control" formControlName="nome" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o nome do fornecedor">
+                <div class="alert alert-danger" *ngIf="(FornecedorNome.touched) && (FornecedorNome.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="FornecedorNome.errors.required">O nome é obrigatório</span>
+                </div>
+            </div>
+
+     
+
+              <!--CampoCPF-->
+              <div class="form-group">
+                <label for="cnpj">CNPJ do fornecedor</label>
+                <input type="text" class="form-control" formControlName="cnpj" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o cnpj do fornecedor">
+                <div class="alert alert-danger" *ngIf="(FornecedorCnpj.touched) && (FornecedorCnpj.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="FornecedorCnpj.errors.required">O cnpj é obrigatório</span>
+                </div>
+            </div>
+
+             
+
+              <!--CampoEmail-->
+              <div class="form-group">
+                <label for="email">Email do fornecedor</label>
+                <input type="text" class="form-control" formControlName="email" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o email do fornecedor">
+                <div class="alert alert-danger" *ngIf="(FornecedorEmail.touched) && (FornecedorEmail.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="FornecedorEmail.errors.required">O email é obrigatório</span>
+                </div>
+            </div>
+
+              <!--CampoEndereço-->
+              <div class="form-group">
+                <label for="endereco">Endereço do fornecedor</label>
+                <input type="text" class="form-control" formControlName="endereco" data-toggle="tooltip"
+                    data-placement="right" title="Entre com o endereço do fornecedor">
+                <div class="alert alert-danger" *ngIf="(FornecedorEndereco.touched) && (FornecedorEndereco.invalid)"
+                    style="margin-top: 5px;">
+                    <span *ngIf="FornecedorEndereco.errors.required">O endereço é obrigatório</span>
+                </div>
+            </div>
+
+              
+
+                <!--CampoTelefone-->
+                <div class="form-group">
+                    <label for="telefone">Telefone do fornecedor</label>
+                    <input type="text" class="form-control" formControlName="telefone" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o telefone do fornecedor">
+                    <div class="alert alert-danger" *ngIf="(FornecedorTelefone.touched) && (FornecedorTelefone.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="FornecedorTelefone.errors.required">O telefone é obrigatório</span>
+                    </div>
+                </div>                   
+              </div>    
+              <div [hidden]="!isupdated">  
+                  <h4>Fornecedor atualizado!</h4>  
+              </div>          
+                  
+        </div>  
+          
+        <!-- Modal footer -->  
+        <div class="modal-footer" >  
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Atualizar</button>  
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Fechar</button>  
+        </div>  
+          
+    </form>  
+      </div>  
+    </div>  
+  </div>

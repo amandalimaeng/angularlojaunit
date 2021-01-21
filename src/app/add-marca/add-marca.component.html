@@ -1,0 +1,52 @@
+
+
+<h3>Adicionar Marca</h3>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="submitted" style="width: 400px;">
+            <form [formGroup]="marcasaveform" #savemarca (ngSubmit)="saveMarca(saveMarca)">
+            
+                <!--CampoNome-->
+               
+                <div class="form-group">
+                    <label for="nome">Nome da marca</label>
+                    <input type="text" class="form-control" formControlName="nome" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o nome do marca">
+                    <div class="alert alert-danger" *ngIf="(MarcaNome.touched) && (MarcaNome.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="MarcaNome.errors.required">O nome é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoDescricao-->
+                  <div class="form-group">
+                    <label for="descricao">Descricao da marca</label>
+                    <input type="text" class="form-control" formControlName="descricao" data-toggle="tooltip"
+                        data-placement="right" title="Entre com a descrição da marca">
+                    <div class="alert alert-danger" *ngIf="(MarcaDescricao.touched) && (MarcaDescricao.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="MarcaDescricao.errors.required">O apelido é obrigatório</span>
+                    </div>
+                </div>
+
+     
+
+
+
+                <button type="submit" class="btn btn-success">Adicionar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="!submitted">
+            <h4>Marca adiconado com sucesso!</h4>
+            <button (click)="addMarcaForm()" class='btn btn-primary'>Adicionar outro marca</button>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>

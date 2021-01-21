@@ -1,0 +1,52 @@
+
+
+<h3>Adicionar Faq</h3>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="submitted" style="width: 400px;">
+            <form [formGroup]="faqsaveform" #savefaq (ngSubmit)="saveFaq(saveFaq)">
+            
+                <!--CampoTexto-->
+               
+                <div class="form-group">
+                    <label for="texto">Digite a sua reclamação</label>
+                    <input type="text"  class="form-control" formControlName="texto" data-toggle="tooltip"
+                        data-placement="right" title="Digite o testo">
+                    <div class="alert alert-danger" *ngIf="(FaqTexto.touched) && (FaqTexto.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="FaqTexto.errors.required">O texto é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoIdProduto-->
+                  <div class="form-group">
+                    <label for="apelido">Id do produto</label>
+                    <input type="text" class="form-control" formControlName="idProduto" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o id do produto">
+                    <div class="alert alert-danger" *ngIf="(FaqIdProduto.touched) && (FaqIdProduto.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="FaqIdProduto.errors.required">O ID é obrigatório</span>
+                    </div>
+                </div>
+
+                 
+
+
+
+                <button type="submit" class="btn btn-success">Adicionar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="!submitted">
+            <h4>Faq adiconado com sucesso!</h4>
+            <button (click)="addFaqForm()" class='btn btn-primary'>Adicionar outro faq</button>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>

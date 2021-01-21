@@ -1,0 +1,107 @@
+
+
+<h3>Adicionar Produto</h3>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="submitted" style="width: 400px;">
+            <form [formGroup]="produtosaveform" #saveproduto (ngSubmit)="saveProduto(saveProduto)">
+            
+                <!--CampoNome-->
+               
+                <div class="form-group">
+                    <label for="nome">Nome do produto</label>
+                    <input type="text" class="form-control" formControlName="nome" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o nome do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoNome.touched) && (ProdutoNome.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoNome.errors.required">O nome é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--Campodescricao-->
+                  <div class="form-group">
+                    <label for="descricao">Descricao do produto</label>
+                    <input type="text" class="form-control" formControlName="descricao" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o descricao do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoDescricao.touched) && (ProdutoDescricao.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoDescricao.errors.required">A descricao é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoidCategoria-->
+                  <div class="form-group">
+                    <label for="idCategoria">idCategoria do produto</label>
+                    <input type="text" class="form-control" formControlName="idCategoria" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o idCategoria do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoIdCategoria.touched) && (ProdutoIdCategoria.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoIdCategoria.errors.required">O idCategoria é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoidFornecedor-->
+                  <div class="form-group">
+                    <label for="idFornecedor">idFornecedor do produto</label>
+                    <input type="text" class="form-control" formControlName="idFornecedor" data-toggle="tooltip"
+                        data-placement="right" title="Entre idFornecedor do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoIdFornecedor.touched) && (ProdutoIdFornecedor.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoIdFornecedor.errors.required">A idFornecedor é obrigatória</span>
+                    </div>
+                </div>
+
+                  <!--CampoidMarca-->
+                  <div class="form-group">
+                    <label for="idMarca">idMarca do produto</label>
+                    <input type="text" class="form-control" formControlName="idMarca" data-toggle="tooltip"
+                        data-placement="right" title="Entre com o idMarca do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoIdMarca.touched) && (ProdutoIdMarca.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoIdMarca.errors.required">O idMarca é obrigatório</span>
+                    </div>
+                </div>
+
+                  <!--CampoprecoUnitario-->
+                  <div class="form-group">
+                    <label for="precoUnitario">precoUnitario do produto</label>
+                    <input type="text" class="form-control" formControlName="precoUnitario" data-toggle="tooltip"
+                        data-placement="right" title="Entre com oprecoUnitario do produto">
+                    <div class="alert alert-danger" *ngIf="(ProdutoPrecoUnitario.touched) && (ProdutoPrecoUnitario.invalid)"
+                        style="margin-top: 5px;">
+                        <span *ngIf="ProdutoPrecoUnitario.errors.required">O precoUnitario é obrigatório</span>
+                    </div>
+                </div>
+
+                      <!--Campounidade-->
+                      <div class="form-group">
+                        <label for="unidade">Unidades do produto</label>
+                        <input type="text" class="form-control" formControlName="unidade" data-toggle="tooltip"
+                            data-placement="right" title="Entre com as unidades do produto">
+                        <div class="alert alert-danger" *ngIf="(ProdutoUnidade.touched) && (ProdutoUnidade.invalid)"
+                            style="margin-top: 5px;">
+                            <span *ngIf="ProdutoUnidade.errors.required">O Unidade é obrigatório</span>
+                        </div>
+                    </div>
+
+                 
+
+
+
+                <button type="submit" class="btn btn-success">Adicionar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden]="!submitted">
+            <h4>Produto adiconado com sucesso!</h4>
+            <button (click)="addProdutoForm()" class='btn btn-primary'>Adicionar outro produto</button>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
